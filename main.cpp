@@ -106,7 +106,7 @@ int main(int argc, char **argv)
     dfile.open(std::string(aDir+"/"+filename));
     if(!dfile)
     {
-        cout<< "ERROR: file not found at "<< std::string(aDir+"/"+filename) << endl;
+        cout<< "ERROR: file not found at " << std::string(aDir+"/"+filename) << endl;
         return 2;
     }
 
@@ -143,15 +143,15 @@ int main(int argc, char **argv)
             cout<<"Invalid desktop entry file"<<endl;
             return 1;
         }
-        if(b.substr(0,4)==std::string("Name"))
+        if(b.substr(0,5)==std::string("Name="))
         {
             name = b.substr(5);
         }
-        if(b.substr(0,4)==std::string("Icon"))
+        if(b.substr(0,5)==std::string("Icon="))
         {
             icon = b.substr(5);
         }
-        if(b.substr(0,4)==std::string("Exec"))
+        if(b.substr(0,5)==std::string("Exec="))
         {
             exec = b.substr(5);
         }
@@ -159,6 +159,15 @@ int main(int argc, char **argv)
     }
 
     dfile.close();
+
+    if(icon.substr(icon.length()-4)==".png"||icon.substr(icon.length()-4)==".svg"||icon.substr(icon.length()-4)==".xpm")
+    {
+
+    }
+    else
+    {
+        icon = "/usr/share/icewm/icons/run_32x32.xpm";
+    }
 
     //Write .lnk file
 
